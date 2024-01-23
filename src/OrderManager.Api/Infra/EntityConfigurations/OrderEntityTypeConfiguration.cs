@@ -33,7 +33,6 @@ public class OrderEntityTypeConfiguration : IEntityTypeConfiguration<Order>
 
         builder.HasOne(o => o.OrderStatus)
             .WithMany()
-            // .HasForeignKey("OrderStatusId");
             .HasForeignKey("_orderStatusId");
     }
 }

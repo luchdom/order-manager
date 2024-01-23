@@ -15,7 +15,7 @@ public class CustomerEntityTypeConfiguration : IEntityTypeConfiguration<Customer
             .UseHiLo("customerseq", AppDbContext.DefaultSchema);
 
         builder.Property(c => c.Aci)
-         .UseHiLo("customerseq", AppDbContext.DefaultSchema);
+         .ValueGeneratedOnAdd();
 
         builder.Property(c => c.Name)
             .HasMaxLength(255)

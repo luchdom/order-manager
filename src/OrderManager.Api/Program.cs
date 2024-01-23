@@ -13,6 +13,7 @@ public class Program
         builder.Services
             .AddEndpointsApiExplorer()
             .AddSwaggerGen()
+            .AddCustomSettings(builder.Configuration)
             .AddCustomDbContext(builder.Configuration)
             .AddCustomHealthChecks(builder.Configuration);
 

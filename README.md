@@ -20,5 +20,5 @@ dotnet ef database update
 
 To add a new migration
 ```
-dotnet ef migrations add <name> --context OrderManager.Api.Infra.AppDbContext
+dotnet ef migrations add <name> --context OrderManager.Api.Infra.AppDbContext -o Data/Migrations
 ```

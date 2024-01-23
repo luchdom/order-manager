@@ -19,6 +19,8 @@ public class Order : Entity, IAuditableEntity
     public Customer Customer { get; set; }
     public IEnumerable<OrderItem> Items { get; set; }
     public OrderStatus OrderStatus { get; private set; }
+    private int _orderStatusId;
+
     public DateTime CreatedAt { get; set; }
     public DateTime? ModifiedAt { get; set; }
 

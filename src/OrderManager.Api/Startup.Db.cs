@@ -9,7 +9,6 @@ internal static partial class Startup
     public static IServiceCollection AddCustomDbContext(this IServiceCollection services, IConfiguration configuration)
     {
         return services
-            .AddEntityFrameworkSqlServer()
             .AddDbContext<AppDbContext>(options =>
             {
                 options.UseSqlServer(configuration["ConnectionString"],
