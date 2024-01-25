@@ -1,6 +1,6 @@
-@OrderManager.Api_HostAddress = http://localhost:5012
+@OrderManager.Api_HostAddress = http://localhost:8080
 
-GET {{OrderManager.Api_HostAddress}}/weatherforecast/
+GET {{OrderManager.Api_HostAddress}}/products/
 Accept: application/json
 
 ###

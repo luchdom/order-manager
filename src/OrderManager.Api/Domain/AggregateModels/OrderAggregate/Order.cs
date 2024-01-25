@@ -29,7 +29,7 @@ public class Order : Entity, IAuditableEntity
         return Items.Sum(item => item.Product.Price * item.Quantity);
     }
 
-    public void AddOrdemItem(Product product, decimal quantity)
+    public void AddOrdemItem(Product product, int quantity)
     {
         var orderItem = new OrderItem(product, quantity);
         var productAlreadyRegistered = _orderItems.SingleOrDefault(x => x.Product.Id.Equals(orderItem.Product.Id));

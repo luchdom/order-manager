@@ -23,7 +23,7 @@ public class OrderItemEntityTypeConfiguration : IEntityTypeConfiguration<OrderIt
             .OnDelete(DeleteBehavior.Restrict);
 
         builder.Property(o => o.Quantity)
-           .IsRequired();
+            .IsRequired();
 
     }
 }

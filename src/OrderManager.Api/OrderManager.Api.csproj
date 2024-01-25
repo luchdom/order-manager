@@ -12,6 +12,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Infra\Migrations\20240123221424_Init.cs" />
+    <Compile Remove="Infra\Migrations\20240123221424_Init.Designer.cs" />
+    <Compile Remove="Infra\Migrations\AppDbContextModelSnapshot.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FluentResults" Version="3.15.2" />
     <PackageReference Include="FluentValidation" Version="11.9.0" />
     <PackageReference Include="MediatR" Version="12.2.0" />
@@ -27,10 +33,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Application\Queries\" />
+    <Folder Include="Application\Behaviors\" />
     <Folder Include="Extensions\" />
     <Folder Include="Infra\Migrations\" />
     <Folder Include="Infra\Repositories\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="OrderManager.IntegrationsTests" />
+    <InternalsVisibleTo Include="OrderManager.UnitTests" />
   </ItemGroup>
 
 </Project>

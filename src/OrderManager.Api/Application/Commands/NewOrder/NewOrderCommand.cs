@@ -1,9 +1,8 @@
 using FluentResults;
 using MediatR;
-
 namespace OrderManager.Api.Application.Commands.NewOrder;
 
-public struct NewOrderCommand : IRequest<Result>
+public class NewOrderCommand : IRequest<Result>
 {
     public NewOrderCommand(string customerId, List<OrderItemRequest> orderItems)
     {
@@ -17,12 +16,12 @@ public struct NewOrderCommand : IRequest<Result>
 
 public struct OrderItemRequest
 {
-    public OrderItemRequest(int productId, decimal quantity)
+    public OrderItemRequest(int productId, int quantity)
     {
         ProductId = productId;
         Quantity = quantity;
     }
 
     public int ProductId { get; }
-    public decimal Quantity { get; }
+    public int Quantity { get; }
 }

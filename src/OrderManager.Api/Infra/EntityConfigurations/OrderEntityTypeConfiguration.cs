@@ -13,8 +13,6 @@ public class OrderEntityTypeConfiguration : IEntityTypeConfiguration<Order>
         builder.HasKey(o => o.Id);
         builder.Property(o => o.Id)
             .UseHiLo("orderseq", AppDbContext.DefaultSchema);
-        builder.Property(o => o.PublicId)
-           .ValueGeneratedOnAdd();
 
         builder.Property(o => o.RequestId)
             .IsRequired();

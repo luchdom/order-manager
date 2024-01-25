@@ -15,7 +15,8 @@ public class Program
             .AddSwaggerGen()
             .AddCustomSettings(builder.Configuration)
             .AddCustomDbContext(builder.Configuration)
-            .AddCustomHealthChecks(builder.Configuration);
+            .AddCustomHealthChecks(builder.Configuration)
+            .AddCustomServices();
 
         var app = builder.Build();
 
