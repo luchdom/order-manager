@@ -14,7 +14,7 @@ public class NewOrderCommand : IRequest<Result>
     public List<OrderItemRequest> OrderItems { get; }
 }
 
-public struct OrderItemRequest
+public class OrderItemRequest
 {
     public OrderItemRequest(int productId, int quantity)
     {
