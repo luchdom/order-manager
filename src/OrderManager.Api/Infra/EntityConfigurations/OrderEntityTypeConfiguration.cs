@@ -15,7 +15,6 @@ public class OrderEntityTypeConfiguration : IEntityTypeConfiguration<Order>
         builder.Property(o => o.Id)
             .UseHiLo("orderseq", AppDbContext.DefaultSchema);
 
-
         builder.Property(o => o.CreatedAt)
             .IsRequired();
 

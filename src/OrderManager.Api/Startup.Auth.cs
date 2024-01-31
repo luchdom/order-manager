@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using OrderManager.Api.Settings;
 using System.Text;
@@ -9,7 +10,7 @@ internal static partial class Startup
 {
     public static IServiceCollection AddAuth(this IServiceCollection services, IConfiguration configuration)
     {
-        var jwtTokenSettings = configuration.Get<JwtTokenSettings>();
+        var jwtTokenSettings = services.BuildServiceProvider().GetService<IOptions<JwtTokenSettings>>()?.Value;
         services
             .AddAuthentication(options => {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

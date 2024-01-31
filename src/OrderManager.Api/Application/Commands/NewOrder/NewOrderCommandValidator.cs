@@ -4,7 +4,7 @@ namespace OrderManager.Api.Application.Commands.NewOrder;
 
 public class NewOrderCommandValidator : AbstractValidator<NewOrderCommand>
 {
-    private NewOrderCommandValidator()
+    public NewOrderCommandValidator()
     {
         RuleFor(x => x.OrderItems).NotEmpty();
         RuleForEach(x => x.OrderItems)

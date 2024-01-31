@@ -7,13 +7,13 @@ public class Order : Entity, IAuditableEntity
 {
     private readonly List<OrderItem> _orderItems = [];
     private Order() { }
-    public Order(int buyerId, IEnumerable<OrderItem> items)
+    public Order(string buyerId, IEnumerable<OrderItem> items)
     {
         BuyerId = buyerId;
         Items = items;
     }
 
-    public int BuyerId { get; set; }
+    public string BuyerId { get; set; }
     public IEnumerable<OrderItem> Items { get; set; }
     public OrderStatus OrderStatus { get; private set; }
     private int _orderStatusId;

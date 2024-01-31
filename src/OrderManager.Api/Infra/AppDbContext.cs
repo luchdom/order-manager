@@ -27,6 +27,7 @@ public class AppDbContext : IdentityUserContext<User>, IUnitOfWork
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfiguration(new OrderEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new OrderItemEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new OrderStatusEntityTypeConfiguration());

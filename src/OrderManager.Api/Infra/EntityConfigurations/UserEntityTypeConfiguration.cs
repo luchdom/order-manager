@@ -8,11 +8,8 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)
     {
-        builder.ToTable("customers", AppDbContext.DefaultSchema);
+        builder.ToTable("users", AppDbContext.DefaultSchema);
 
-        builder.HasKey(c => c.Id);
-        builder.Property(c => c.Id)
-            .UseHiLo("customerseq", AppDbContext.DefaultSchema);
 
 
     }

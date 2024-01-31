@@ -18,6 +18,7 @@ public class Program
             });
         builder.Services
             .AddRouting(options => options.LowercaseUrls = true)
+            .AddCore()
             .AddCustomSettings(builder.Configuration)
             .AddCustomDbContext(builder.Configuration)
             .AddCustomIdentity()

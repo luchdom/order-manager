@@ -32,9 +32,11 @@ namespace OrderManager.Api.Application.Commands.RegisterUser
             if (result.Succeeded)
                 return Result.Ok();
 
+            
             var errors = result.Errors
                .Select(errors => new Error(errors.Description))
                .ToList();
+            _logger.LogDebug("User with email {Email} could not be registered due to {@Errors}", request.Email, errors);
             return Result.Fail(errors);
          }
     }
