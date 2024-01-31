@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OrderManager.Api.Domain.AggregateModels.OrderAggregate;
+using OrderManager.Api.Domain.AggregateModels.UserAggregate;
 
 namespace OrderManager.Api.Infra.EntityConfigurations;
 
@@ -14,8 +15,6 @@ public class OrderEntityTypeConfiguration : IEntityTypeConfiguration<Order>
         builder.Property(o => o.Id)
             .UseHiLo("orderseq", AppDbContext.DefaultSchema);
 
-        builder.Property(o => o.RequestId)
-            .IsRequired();
 
         builder.Property(o => o.CreatedAt)
             .IsRequired();
@@ -23,10 +22,11 @@ public class OrderEntityTypeConfiguration : IEntityTypeConfiguration<Order>
         builder.Property(o => o.ModifiedAt)
           .IsRequired();
 
-        builder.HasOne(o => o.Customer)
+        builder.HasOne<User>()
             .WithMany()
             .IsRequired()
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Restrict)
+            .HasForeignKey(o=>o.BuyerId);
 
 
         builder.HasOne(o => o.OrderStatus)

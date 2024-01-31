@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace OrderManager.Api;
+namespace OrderManager.Api.Settings;
 
 public class OrderManagerApiSettings
 {

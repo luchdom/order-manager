@@ -4,3 +4,15 @@ GET {{OrderManager.Api_HostAddress}}/products/
 Accept: application/json
 
 ###
+
+POST {{OrderManager.Api_HostAddress}}/orders/
+Content-Type: application/json
+Accept: application/json
+
+{
+    "date": "2023-05-10",
+    "temperatureC": 30,
+    "summary": "Warm"
+}
+
+###

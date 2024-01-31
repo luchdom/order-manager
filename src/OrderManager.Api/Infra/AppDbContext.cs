@@ -1,20 +1,20 @@
 using System.Data;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
-using OrderManager.Api.Domain.AggregateModels.CustomerAggregate;
 using OrderManager.Api.Domain.AggregateModels.OrderAggregate;
 using OrderManager.Api.Domain.AggregateModels.ProductAggregate;
+using OrderManager.Api.Domain.AggregateModels.UserAggregate;
 using OrderManager.Api.Domain.SeedWork;
 using OrderManager.Api.Infra.EntityConfigurations;
 
 namespace OrderManager.Api.Infra;
 
-public class AppDbContext : DbContext, IUnitOfWork
+public class AppDbContext : IdentityUserContext<User>, IUnitOfWork
 {
     public const string DefaultSchema = "dbo";
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderItem> OrderItems { get; set; }
-    public DbSet<Customer> Customers { get; set; }
     public DbSet<Product> Products { get; set; }
 
     private IDbContextTransaction _currentTransaction;
@@ -29,7 +29,8 @@ public class AppDbContext : DbContext, IUnitOfWork
     {
         modelBuilder.ApplyConfiguration(new OrderEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new OrderItemEntityTypeConfiguration());
-        modelBuilder.ApplyConfiguration(new CustomerEntityTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new OrderStatusEntityTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new UserEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new ProductEntityTypeConfiguration());
     }
 

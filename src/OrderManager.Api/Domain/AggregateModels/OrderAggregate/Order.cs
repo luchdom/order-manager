@@ -1,4 +1,3 @@
-using OrderManager.Api.Domain.AggregateModels.CustomerAggregate;
 using OrderManager.Api.Domain.AggregateModels.ProductAggregate;
 using OrderManager.Api.Domain.SeedWork;
 
@@ -8,15 +7,13 @@ public class Order : Entity, IAuditableEntity
 {
     private readonly List<OrderItem> _orderItems = [];
     private Order() { }
-    public Order(Guid requestId, Customer customer, IEnumerable<OrderItem> items)
+    public Order(int buyerId, IEnumerable<OrderItem> items)
     {
-        RequestId = requestId;
-        Customer = customer;
+        BuyerId = buyerId;
         Items = items;
     }
 
-    public Guid RequestId { get; set; }
-    public Customer Customer { get; set; }
+    public int BuyerId { get; set; }
     public IEnumerable<OrderItem> Items { get; set; }
     public OrderStatus OrderStatus { get; private set; }
     private int _orderStatusId;

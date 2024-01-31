@@ -1,3 +1,7 @@
+
+
+using System.Text.Json.Serialization;
+
 namespace OrderManager.Api;
 
 public class Program
@@ -6,21 +10,23 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        // Add services to the container.
-
-        builder.Services.AddControllers();
-        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services
-            .AddEndpointsApiExplorer()
-            .AddSwaggerGen()
+            .AddControllers()
+            .AddJsonOptions(opt =>
+            {
+                opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            });
+        builder.Services
+            .AddRouting(options => options.LowercaseUrls = true)
             .AddCustomSettings(builder.Configuration)
             .AddCustomDbContext(builder.Configuration)
+            .AddCustomIdentity()
+            .AddAuth(builder.Configuration)
             .AddCustomHealthChecks(builder.Configuration)
             .AddCustomServices();
 
         var app = builder.Build();
 
-        // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
@@ -30,7 +36,9 @@ public class Program
         app.MapHealthChecks("/health");
 
         //app.UseHttpsRedirection();
+        app.UseStatusCodePages();
 
+        app.UseAuthentication();
         app.UseAuthorization();
 
         app.MapControllers();
