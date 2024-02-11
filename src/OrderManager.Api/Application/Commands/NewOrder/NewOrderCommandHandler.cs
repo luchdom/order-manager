@@ -3,11 +3,11 @@ using MediatR;
 
 namespace OrderManager.Api.Application.Commands.NewOrder;
 
-public class NewOrderHandler : IRequestHandler<NewOrderCommand, Result>
+public class NewOrderCommandHandler : IRequestHandler<NewOrderCommand, Result>
 {
-    private readonly ILogger<NewOrderHandler> _logger;
+    private readonly ILogger<NewOrderCommandHandler> _logger;
 
-    public NewOrderHandler(ILogger<NewOrderHandler> logger)
+    public NewOrderCommandHandler(ILogger<NewOrderCommandHandler> logger)
     {
         _logger = logger;
     }

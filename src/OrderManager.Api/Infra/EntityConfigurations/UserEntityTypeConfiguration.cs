@@ -10,7 +10,11 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
     {
         builder.ToTable("users", AppDbContext.DefaultSchema);
 
+        builder.Property(u => u.AnonymousId)
+            .IsRequired()
+            .ValueGeneratedOnAdd();
 
-
+        builder.HasIndex(u => u.AnonymousId)
+            .IsUnique();
     }
 }

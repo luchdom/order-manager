@@ -7,7 +7,7 @@ using System.Data;
 
 namespace OrderManager.Api.Application.Commands.RegisterUser
 {
-    public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, Result>
+    public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, Result<int>>
     {
         private readonly ILogger<RegisterUserCommandHandler> _logger;
         private readonly UserManager<User> _userManager;
@@ -23,14 +23,13 @@ namespace OrderManager.Api.Application.Commands.RegisterUser
             _userManager = userManager;
             _tokenService = tokenService;
         }
-        public async Task<Result> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
+        public async Task<Result<int>> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
-            var result = await _userManager.CreateAsync(
-              new User { UserName = request.Username, Email = request.Email },
-              request.Password!);
+            var user = new User { UserName = request.Email, Email = request.Email };
+            var result = await _userManager.CreateAsync(user, request.Password);
 
             if (result.Succeeded)
-                return Result.Ok();
+                return Result.Ok(user.Id);
 
             
             var errors = result.Errors

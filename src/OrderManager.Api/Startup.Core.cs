@@ -1,4 +1,5 @@
 
+using Asp.Versioning;
 using FluentValidation;
 using Microsoft.OpenApi.Models;
 using OrderManager.Api.Application.Behaviors;
@@ -13,12 +14,24 @@ internal static partial class Startup
             .AddEndpointsApiExplorer()
             .AddCustomSwagger()
             .AddProblemDetails()
-            .AddApiVersioning();
+            .AddProblemDetailsConventions();
+        services.AddApiVersioning(options =>
+        {
+            options.DefaultApiVersion = new ApiVersion(1, 0);
+            options.AssumeDefaultVersionWhenUnspecified = true;
+            options.ReportApiVersions = true;
+        })
+        .AddApiExplorer(options =>
+        {
+            options.GroupNameFormat = "'v'VVV";
+            options.SubstituteApiVersionInUrl = true;
+        });
         services.AddValidatorsFromAssembly(typeof(Startup).Assembly);
         services.AddMediatR(cfg =>
         {
             cfg.RegisterServicesFromAssembly(typeof(Startup).Assembly);
             cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
+            cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
         });
         return services;
     }

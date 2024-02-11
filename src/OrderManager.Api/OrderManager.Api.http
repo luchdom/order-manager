@@ -1,5 +1,17 @@
 @OrderManager.Api_HostAddress = http://localhost:8080
 
+POST {{OrderManager.Api_HostAddress}}/v1/users/register
+Content-Type: application/json
+Accept: application/json
+
+{
+    "email": "sadasp",
+    "password": "sd"
+}
+
+###
+
+
 GET {{OrderManager.Api_HostAddress}}/products/
 Accept: application/json
 

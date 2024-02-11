@@ -1,4 +1,5 @@
 using System.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -10,7 +11,7 @@ using OrderManager.Api.Infra.EntityConfigurations;
 
 namespace OrderManager.Api.Infra;
 
-public class AppDbContext : IdentityUserContext<User>, IUnitOfWork
+public class AppDbContext : IdentityDbContext<User,IdentityRole<int>,int>, IUnitOfWork
 {
     public const string DefaultSchema = "dbo";
     public DbSet<Order> Orders { get; set; }
@@ -28,11 +29,8 @@ public class AppDbContext : IdentityUserContext<User>, IUnitOfWork
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        modelBuilder.ApplyConfiguration(new OrderEntityTypeConfiguration());
-        modelBuilder.ApplyConfiguration(new OrderItemEntityTypeConfiguration());
-        modelBuilder.ApplyConfiguration(new OrderStatusEntityTypeConfiguration());
-        modelBuilder.ApplyConfiguration(new UserEntityTypeConfiguration());
-        modelBuilder.ApplyConfiguration(new ProductEntityTypeConfiguration());
+        modelBuilder.HasDefaultSchema(DefaultSchema);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
     }
 
     public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)

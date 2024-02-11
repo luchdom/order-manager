@@ -11,9 +11,9 @@ namespace OrderManager.Api.Application.Behaviors
          where TResponse : ResultBase, new()
     {
         private readonly ILogger<ValidationBehavior<TRequest, TResponse>> _logger;
-        private readonly IValidator<TRequest>[] _validators;
+        private readonly IEnumerable<IValidator<TRequest>> _validators;
 
-        public ValidationBehavior(IValidator<TRequest>[] validators, ILogger<ValidationBehavior<TRequest, TResponse>> logger)
+        public ValidationBehavior(IEnumerable<IValidator<TRequest>> validators, ILogger<ValidationBehavior<TRequest, TResponse>> logger)
         {
             _validators = validators;
             _logger = logger;
